@@ -4,8 +4,8 @@ const nodemailer = require("nodemailer");
 const jwt = require("jsonwebtoken");
 
 const client_url = process.env.CLIENT_URL;
-const googleRecaptchaSecretKey = process.env.RECAPTCHA_SECRET_KEY;
-const googleRecaptchaAPI = process.env.GOOGLE_RECAPTCHA_API;
+// const googleRecaptchaSecretKey = process.env.RECAPTCHA_SECRET_KEY;
+// const googleRecaptchaAPI = process.env.GOOGLE_RECAPTCHA_API;
 
 const sender = nodemailer.createTransport({
     service: "Gmail",
@@ -84,30 +84,31 @@ const signUp = async (req, res, next) => {
 
 const signIn = async (req, res, next) => {
     try {
-        const { email, password, recaptcha_value } = req.body;
+        const { email, password } = req.body;
+        // const { email, password, recaptcha_value } = req.body;
         if (!email || !password) {
             return next({
                 msg: "Required fields missing",
                 status: 400
             })
         }
-        if (!recaptcha_value) {
-            return next({
-                msg: "Missing ReCaptcha",
-                status: 400
-            })
-        }
-        const response = await fetch(googleRecaptchaAPI, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/x-www-form-urlencoded",
-            },
-            body: new URLSearchParams({
-                secret: googleRecaptchaSecretKey,
-                response: recaptcha_value
-            })
-        })
-        const googleResponse = await response.json();
+        // if (!recaptcha_value) {
+        //     return next({
+        //         msg: "Missing ReCaptcha",
+        //         status: 400
+        //     })
+        // }
+        // const response = await fetch(googleRecaptchaAPI, {
+        //     method: "POST",
+        //     headers: {
+        //         "Content-Type": "application/x-www-form-urlencoded",
+        //     },
+        //     body: new URLSearchParams({
+        //         secret: googleRecaptchaSecretKey,
+        //         response: recaptcha_value
+        //     })
+        // })
+        // const googleResponse = await response.json();
         // if (!googleResponse.success) {
         //     return next({
         //         msg: "Invalid reCaptcha value or secret key",
