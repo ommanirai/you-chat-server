@@ -5,13 +5,6 @@ const messageRouter = require("./routers/message.route");
 const userRouter = require("./routers/user.route");
 const authenticate = require("./middlewares/authenticate")
 
-router.use("/", (req, res, next) => {
-    res.json({
-        msg: "You Chat Running Successfully",
-        status: 200
-    })
-})
-
 router.use("/auth", authRouter);
 router.use("/user", userRouter);
 router.use("/conversation", authenticate, conversationRouter);
