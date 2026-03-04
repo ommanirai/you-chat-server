@@ -66,12 +66,12 @@ const signUp = async (req, res, next) => {
             email: newUser.email,
             link: `${client_url}/auth/account-verification/${newUser._id}`
         }
-        var emailContent = prepareMail(emailData)
+        // var emailContent = prepareMail(emailData)
         if (newUser) {
-            var info = await sender.sendMail(emailContent)
+            // var info = await sender.sendMail(emailContent)
             res.json({
                 msg: "Signup successfully",
-                emailInfo: info,
+                // emailInfo: info,
                 data: newUser,
                 status: 200
             })
