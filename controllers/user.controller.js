@@ -29,12 +29,12 @@ const getFilteredUserToStartConversation = async (req, res, next) => {
         }
 
         const conversationNotStartedYet = await UserModel.find({ _id: { $nin: alreadyConnectedUsers } });
-        if (!conversationNotStartedYet.length) {
-            return next({
-                msg: "No new users found for new conversation",
-                status: 400
-            })
-        }
+        // if (!conversationNotStartedYet.length) {
+        //     return next({
+        //         msg: "No new users found for new conversation",
+        //         status: 400
+        //     })
+        // }
         res.json({
             data: conversationNotStartedYet,
             status: 200
