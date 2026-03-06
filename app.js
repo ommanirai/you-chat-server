@@ -81,13 +81,13 @@ io.on("connection", socket => {
     })
 })
 
-// app.use("/", apiRoutes)
-app.use("/", (req,res,next) =>{
-    res.json({
-        msg:"Vercel Backend Running!",
-        status:200
-    })
-})
+app.use("/", apiRoutes)
+// app.use("/", (req,res,next) =>{
+//     res.json({
+//         msg:"Vercel Backend Running!",
+//         status:200
+//     })
+// })
 
 app.use(function (req, res, next) {
     next({
