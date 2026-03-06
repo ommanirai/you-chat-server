@@ -6,7 +6,7 @@ const userRouter = require("./routers/user.route");
 const authenticate = require("./middlewares/authenticate")
 
 router.use("/auth", authRouter);
-router.use("/user", userRouter);
+router.use("/user",authenticate, userRouter);
 router.use("/conversation", authenticate, conversationRouter);
 router.use("/message", authenticate, messageRouter);
 

@@ -66,4 +66,29 @@ const getConversationById = async (req, res, next) => {
     }
 }
 
-module.exports = { createConversation, getConversationById }
+const getFilteredUserToStartConversations = async (req, res, next) => {
+    try {
+        const logged_in_user = req.loggedInUser._id;
+        const conversations = await Conversation.find({
+            members: logged_in_user
+        });
+        
+        const existingUserIds = conversations.flatMap(conv => conv.members.filter(member => member.toString() !== logged_in_user));
+        
+        const notStartedUsers = await UserModel.find({
+            _id: {
+                $nin: [...existingUserIds, logged_in_user]
+            }
+        });
+        console.log("notStartedUsers: ", notStartedUsers)
+        res.json({
+            data: notStartedUsers,
+            status: 200
+        })
+    }
+    catch (err) {
+        return next(err)
+    }
+}
+
+module.exports = { createConversation, getConversationById, getFilteredUserToStartConversations }
