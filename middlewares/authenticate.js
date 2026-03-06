@@ -15,7 +15,7 @@ module.exports = async function (req, res, next) {
         }
         if (token) {
             const decoded = jwt.verify(token, process.env.JWT_SECRET)
-            const updatedFreshUser = await UserModel.findById(decoded._id)
+            const updatedFreshUser = await UserModel.findById(decoded._id).select("-password")
             if (!updatedFreshUser) {
                 return next({
                     msg: "Authentication failed. User not found",

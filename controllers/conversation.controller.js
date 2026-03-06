@@ -72,19 +72,22 @@ const getFilteredUserToStartConversations = async (req, res, next) => {
         const conversations = await Conversation.find({
             members: logged_in_user
         });
-        
+
         const existingUserIds = conversations.flatMap(conv => conv.members.filter(member => member.toString() !== logged_in_user));
-        
-        const notStartedUsers = await UserModel.find({
-            _id: {
-                $nin: [...existingUserIds, logged_in_user]
-            }
-        });
-        console.log("notStartedUsers: ", notStartedUsers)
-        res.json({
-            data: notStartedUsers,
-            status: 200
-        })
+
+        const notStartedUsers = await UserModel
+            .find({
+                _id: {
+                    $nin: [...existingUserIds, logged_in_user]
+                }
+            }).select("-password");
+
+        if (notStartedUsers) {
+            return res.json({
+                data: notStartedUsers,
+                status: 200
+            })
+        }
     }
     catch (err) {
         return next(err)
