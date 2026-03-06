@@ -50,7 +50,7 @@ const getConversationById = async (req, res, next) => {
                     full_name: user.full_name,
                     _id: user._id,
                 },
-                conversationId: con._id || "no id found"
+                conversationId: con._id || "id not found"
             }
         }))
         if (conversationUserData) {
