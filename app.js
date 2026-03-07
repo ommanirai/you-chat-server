@@ -81,13 +81,14 @@ io.on("connection", socket => {
     })
 })
 
+app.get("/ping", (req, res, next) => {
+    res.json({
+        msg: "Server is alive!",
+        status: 200
+    })
+})
+
 app.use("/", apiRoutes)
-// app.use("/", (req,res,next) =>{
-//     res.json({
-//         msg:"Vercel Backend Running!",
-//         status:200
-//     })
-// })
 
 app.use(function (req, res, next) {
     next({
