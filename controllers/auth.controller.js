@@ -70,7 +70,7 @@ const signUp = async (req, res, next) => {
         if (newUser) {
             // var info = await sender.sendMail(emailContent)
             res.json({
-                msg: "Signup successfully",
+                msg: "Signup successfully.",
                 // emailInfo: info,
                 data: newUser,
                 status: 200
@@ -88,7 +88,7 @@ const signIn = async (req, res, next) => {
         // const { email, password, recaptcha_value } = req.body;
         if (!email || !password) {
             return next({
-                msg: "Required fields missing",
+                msg: "Required fields missing.",
                 status: 400
             })
         }
@@ -124,7 +124,7 @@ const signIn = async (req, res, next) => {
         }
         if (user.isActivated) {
             return next({
-                msg: "Your account is unverified. Please verify your account to login",
+                msg: "Your account is unverified. Please verify your account to login.",
                 status: 401
             })
         }
@@ -132,14 +132,14 @@ const signIn = async (req, res, next) => {
         if (isMatched) {
             var token = createToken(user)
             res.json({
-                msg: "Logged in successfully",
+                msg: "Logged in successfully.",
                 user,
                 token,
             })
         }
         else {
             return next({
-                msg: "Invalid password",
+                msg: "Invalid password.",
                 status: 400
             })
         }

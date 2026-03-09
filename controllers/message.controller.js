@@ -7,7 +7,7 @@ const createMessage = async (req, res, next) => {
         const { conversation_id = "", sender_id, message, receiver_id = "" } = req.body;
         if (!sender_id || !message) {
             return next({
-                msg: "Please fill all required fields",
+                msg: "Please fill all required fields.",
                 status: 400
             })
         }
@@ -16,7 +16,7 @@ const createMessage = async (req, res, next) => {
             const newMessages = await Message.create({ conversation_id: newConversation._id, sender_id, message });
             if (newMessages) {
                 return res.json({
-                    msg: "Message sent successfully by creating new conversation",
+                    msg: "Message sent successfully by creating new conversation.",
                     data: newMessages,
                     status: 200
                 })
@@ -24,7 +24,7 @@ const createMessage = async (req, res, next) => {
         }
         if (!conversation_id && !receiver_id) {
             return next({
-                msg: "Receiver is required if you want to start a new conversation",
+                msg: "Receiver is required if you want to start a new conversation.",
                 status: 400
             })
         }
@@ -32,7 +32,7 @@ const createMessage = async (req, res, next) => {
         const newMessage = await Message.create({ conversation_id, sender_id, message });
         if (newMessage) {
             res.json({
-                msg: "Message sent in existing conversation",
+                msg: "Message sent in existing conversation.",
                 data: newMessage,
                 status: 200
             })
@@ -78,7 +78,7 @@ const getMessageById = async (req, res, next) => {
         // const finalmessageUserData = await messageUserData;
         if (messageUserData) {
             res.json({
-                msg: "Message fetched successfully",
+                msg: "Message fetched successfully.",
                 data: messageUserData,
                 status: 200
             })

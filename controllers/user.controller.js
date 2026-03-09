@@ -5,7 +5,7 @@ const getAllUser = async (req, res, next) => {
         const user = await UserModel.find({}, { email: 1, full_name: 1 });
         if (!user.length) {
             return next({
-                msg: "No users found",
+                msg: "No users found.",
                 status: 400
             })
         }

@@ -6,7 +6,7 @@ const createConversation = async (req, res, next) => {
         const { sender_id, receiver_id } = req.body;
         if (!sender_id || !receiver_id) {
             return next({
-                msg: "Required fields missing",
+                msg: "Required fields missing.",
                 status: 400
             })
         }
@@ -17,14 +17,14 @@ const createConversation = async (req, res, next) => {
 
         if (existing) {
             return res.json({
-                msg: "Conversation already exists",
+                msg: "Conversation already exists.",
                 conversationId: existing._id
             });
         }
         const newConversation = await Conversation.create({ members: [sender_id, receiver_id] });
         if (newConversation) {
             res.json({
-                msg: "Conversation Success",
+                msg: "Conversation Success.",
                 data: newConversation,
                 status: 200
             })
@@ -50,12 +50,12 @@ const getConversationById = async (req, res, next) => {
                     full_name: user.full_name,
                     _id: user._id,
                 },
-                conversationId: con._id || "id not found"
+                conversationId: con._id || "id not found."
             }
         }))
         if (conversationUserData) {
             res.json({
-                msg: "Conversation data fetched",
+                msg: "Conversation data fetched.",
                 data: conversationUserData,
                 status: 200
             })
